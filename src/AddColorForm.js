@@ -1,13 +1,15 @@
 import { useInput } from "./hooks"
+import { useColors } from "./color-hooks"
 
 
-export default function AddColorForm({ onNewColor = f => f}){
+export default function AddColorForm(){
    const [titleProps, resetTitle] = useInput("")
-   const [colorProps, resetColor]= useInput("")
+   const [colorProps, resetColor]= useInput("#00000")
+   const {addColor} = useColors();
 
    const submit = e => {
     e.preventDefault();
-    onNewColor(titleProps.value, colorProps.value);
+    addColor(titleProps.value, colorProps.value);
     resetTitle("")
     resetColor("")
    }
@@ -18,7 +20,7 @@ export default function AddColorForm({ onNewColor = f => f}){
         <input {...colorProps} type="color" required />
         <button>ADD</button> 
     </form>
-   )
+    )
 
    }
 
